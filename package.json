@@ -1,17 +1,25 @@
 {
-  "name": "temp-app",
-  "version": "0.1.0",
+  "name": "cyclone-intelligence-platform",
+  "version": "1.0.0",
+  "description": "Operational-grade Tropical Cyclone Track, Intensity, and Rapid Intensification Intelligence Platform (North Indian Ocean Basin)",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint"
   },
   "dependencies": {
+    "@types/leaflet": "^1.9.22",
+    "cloudflared": "^0.7.3",
+    "clsx": "^2.1.1",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^1.48.0",
     "next": "16.3.6",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "recharts": "^3.10.1",
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -22,5 +30,8 @@
     "eslint-config-next": "16.3.6",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "allowScripts": {
+    "cloudflared@0.7.3": true
   }
 }
