@@ -1,4 +1,4 @@
-import { CycloneIntensityCategory, GeoCoordinate, TrackPoint } from "./cyclone";
+import { CycloneIntensityCategory, TrackPoint } from "./cyclone";
 
 export interface HistoricalCase {
   id: string;

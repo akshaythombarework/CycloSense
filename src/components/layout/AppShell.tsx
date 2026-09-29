@@ -10,19 +10,18 @@ import { SatelliteAnalysisView } from "../satellite/SatelliteAnalysisView";
 import { CyclonePredictionView } from "../prediction/CyclonePredictionView";
 import { HistoricalValidationView } from "../validation/HistoricalValidationView";
 import { ModelPerformanceView } from "../validation/ModelPerformanceView";
-import { DataSourcesView } from "../sources/DataSourcesView";
 
 import { cycloneService } from "@/services/cycloneService";
 import { satelliteService } from "@/services/satelliteService";
 import { predictionService } from "@/services/predictionService";
 import { validationService } from "@/services/validationService";
-import { dataSourcesService } from "@/services/dataSourcesService";
+import { ForecastPoint } from "@/types/prediction";
 
 export const AppShell: React.FC = () => {
   const [activeTab, setActiveTab] = useState<NavTabId>("mission-control");
   const [selectedCycloneId, setSelectedCycloneId] = useState<string>("BOB-04-2026");
   const [selectedTimeOffset, setSelectedTimeOffset] = useState<"T-12h" | "T-9h" | "T-6h" | "T-3h" | "NOW">("NOW");
-  const [selectedForecastPoint, setSelectedForecastPoint] = useState<any | null>(null);
+  const [selectedForecastPoint, setSelectedForecastPoint] = useState<ForecastPoint | null>(null);
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
   const [isEventsOpen, setIsEventsOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
@@ -39,7 +38,6 @@ export const AppShell: React.FC = () => {
   const historicalCases = validationService.getHistoricalCases();
   const modelBenchmarks = validationService.getModelBenchmarks();
   const leadTimeMetrics = validationService.getValidationMetrics();
-  const dataSources = dataSourcesService.getDataSources();
 
   // Keyboard shortcut for Search (Cmd/Ctrl + K)
   useEffect(() => {
@@ -58,17 +56,19 @@ export const AppShell: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#0B1120] text-[#F8FAFC]">
-      {/* Top Header */}
+    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#0F172A] text-[#F1F5F9]">
+      {/* Top Header - z-index above map */}
+      <div className="relative z-10 flex-shrink-0">
       <TopHeader
         activeSystemsCount={activeCyclones.length}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenEvents={() => setIsEventsOpen(true)}
         unreadEventsCount={aiEvents.length}
       />
+      </div>
 
       {/* Main Operations Body */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative z-0">
         {/* Navigation Sidebar */}
         <Sidebar
           activeTab={activeTab}
@@ -125,10 +125,6 @@ export const AppShell: React.FC = () => {
               benchmarks={modelBenchmarks}
               leadTimeMetrics={leadTimeMetrics}
             />
-          )}
-
-          {activeTab === "data-sources" && (
-            <DataSourcesView sources={dataSources} />
           )}
         </main>
       </div>

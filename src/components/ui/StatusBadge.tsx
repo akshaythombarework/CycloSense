@@ -31,9 +31,9 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
 }) => {
   const normStatus = (status || "").toLowerCase();
 
-  let colorClasses = "bg-[#172033] text-[#94A3B8] border-[#263449]";
+  let colorClasses = "bg-[#1E293B] text-[#94A3B8] border-[#334155]";
   let IconComponent: React.ElementType = HelpCircle;
-  let defaultLabel = label || (status ? status.toUpperCase() : "UNKNOWN");
+  const defaultLabel = label || (status ? status.toUpperCase() : "UNKNOWN");
 
   if (
     normStatus.includes("normal") ||
@@ -47,10 +47,10 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     normStatus.includes("optimal") ||
     normStatus.includes("active")
   ) {
-    colorClasses = "bg-[#062419] text-[#22C55E] border-[#134E35]";
+    colorClasses = "bg-[#15803D]/15 text-[#15803D] border-[#15803D]/30 font-bold";
     IconComponent = CheckCircle2;
   } else if (normStatus.includes("warning") || normStatus.includes("developing") || normStatus.includes("moderate")) {
-    colorClasses = "bg-[#291B07] text-[#F59E0B] border-[#5A3E11]";
+    colorClasses = "bg-[#B45309]/15 text-[#B45309] border-[#B45309]/30 font-bold";
     IconComponent = AlertTriangle;
   } else if (
     normStatus.includes("ri") ||
@@ -58,28 +58,28 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     normStatus.includes("critical") ||
     normStatus.includes("severe")
   ) {
-    colorClasses = "bg-[#2D0D17] text-[#F43F5E] border-[#65182D]";
+    colorClasses = "bg-[#B91C1C]/15 text-[#B91C1C] border-[#B91C1C]/30 font-bold";
     IconComponent = Zap;
   } else if (normStatus.includes("pred") || normStatus.includes("forecast")) {
-    colorClasses = "bg-[#0B1E3B] text-[#60A5FA] border-[#1D3E70]";
+    colorClasses = "bg-[#3B82F6]/15 text-[#3B82F6] border-[#3B82F6]/30 font-bold";
     IconComponent = Radio;
   } else if (normStatus.includes("info")) {
-    colorClasses = "bg-[#072338] text-[#38BDF8] border-[#0E4970]";
+    colorClasses = "bg-[#0284C7]/15 text-[#0284C7] border-[#0284C7]/30 font-bold";
     IconComponent = Info;
   } else if (normStatus.includes("invalid") || normStatus.includes("failed")) {
-    colorClasses = "bg-[#2D1214] text-[#EF4444] border-[#601D22]";
+    colorClasses = "bg-[#B91C1C]/15 text-[#B91C1C] border-[#B91C1C]/30 font-bold";
     IconComponent = AlertCircle;
   } else if (normStatus.includes("degraded")) {
-    colorClasses = "bg-[#291B07] text-[#F59E0B] border-[#5A3E11]";
+    colorClasses = "bg-[#B45309]/15 text-[#B45309] border-[#B45309]/30 font-bold";
     IconComponent = AlertTriangle;
   } else if (normStatus.includes("reference")) {
-    colorClasses = "bg-[#1E1638] text-[#A78BFA] border-[#3F2B75]";
+    colorClasses = "bg-[#3B82F6]/15 text-[#3B82F6] border-[#3B82F6]/30 font-bold";
     IconComponent = Radio;
   } else if (normStatus.includes("simulated") || normStatus.includes("demo")) {
-    colorClasses = "bg-[#291B07] text-[#F59E0B] border-[#5A3E11]";
+    colorClasses = "bg-[#B45309]/15 text-[#B45309] border-[#B45309]/30 font-bold";
     IconComponent = ShieldAlert;
   } else if (normStatus.includes("unavailable") || normStatus.includes("n/a") || normStatus === "--") {
-    colorClasses = "bg-[#111827] text-[#64748B] border-[#263449]";
+    colorClasses = "bg-[#1E293B] text-[#94A3B8] border-[#334155]";
     IconComponent = Minus;
   }
 
@@ -87,7 +87,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
 
   return (
     <span
-      className={`inline-flex items-center gap-1 font-mono font-medium rounded-[3px] border tracking-wider uppercase ${paddingClasses} ${colorClasses} ${className}`}
+      className={`inline-flex items-center gap-1 font-mono rounded-[4px] border tracking-wider uppercase ${paddingClasses} ${colorClasses} ${className}`}
     >
       {showIcon && <IconComponent className={size === "sm" ? "w-2.5 h-2.5" : "w-3 h-3"} />}
       <span>{label || defaultLabel}</span>

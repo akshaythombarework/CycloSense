@@ -189,7 +189,7 @@ export const MOCK_PATTERN_EVOLUTION: PatternEvolutionSnapshot[] = [
 
 export const MOCK_EXPLAINABILITY: ExplainabilityData = {
   modelName: "CycloneAI-FusionNet",
-  version: "v0.1.0-alpha",
+  version: "v1.0",
   riProbabilityPercent: 84,
   primaryIntensificationDriver: "High Sea Surface Temperature (30.4°C) + Low Environmental Wind Shear (< 8 kt)",
   attentionHeatmapAvailable: true,

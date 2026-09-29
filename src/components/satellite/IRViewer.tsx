@@ -3,7 +3,6 @@
 import React from "react";
 import { IRAnalysisMetrics } from "@/types/satellite";
 import { GeoCoordinate } from "@/types/cyclone";
-import { Thermometer, Eye, Crosshair, ShieldCheck } from "lucide-react";
 import { DataProvenanceBadge } from "../ui/DataProvenanceBadge";
 
 interface IRViewerProps {
@@ -20,13 +19,13 @@ export const IRViewer: React.FC<IRViewerProps> = ({
   return (
     <div className="flex flex-col lg:flex-row gap-3 h-full">
       {/* Left: Satellite Image Screen Canvas Container */}
-      <div className="flex-1 bg-[#060A12] border border-[#263449] rounded-[4px] relative overflow-hidden flex flex-col min-h-[380px]">
+      <div className="flex-1 bg-[#0F172A] border border-[#334155] rounded-[4px] relative overflow-hidden flex flex-col min-h-[380px]">
         {/* Top Overlay Badge */}
         <div className="absolute top-2 left-2 z-10 flex items-center gap-2">
-          <span className="px-2 py-0.5 bg-[#111827]/90 border border-[#263449] rounded-[3px] text-[10px] font-mono text-[#38BDF8] font-bold backdrop-blur-sm">
+          <span className="px-2 py-0.5 bg-[#1E293B]/90 border border-[#334155] rounded-[3px] text-[10px] font-mono text-[#0284C7] font-bold backdrop-blur-sm">
             INSAT-3DR TIR-1 (10.8 µm)
           </span>
-          <span className="px-2 py-0.5 bg-[#111827]/90 border border-[#263449] rounded-[3px] text-[10px] font-mono text-[#CBD5E1] backdrop-blur-sm">
+          <span className="px-2 py-0.5 bg-[#1E293B]/90 border border-[#334155] rounded-[3px] text-[10px] font-mono text-[#94A3B8] backdrop-blur-sm">
             {timestamp}
           </span>
         </div>
@@ -51,22 +50,22 @@ export const IRViewer: React.FC<IRViewerProps> = ({
                 <stop offset="0%" stopColor="#1E3A8A" stopOpacity="0.8" />
                 <stop offset="40%" stopColor="#0284C7" stopOpacity="0.6" />
                 <stop offset="70%" stopColor="#0D9488" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="#0B1120" stopOpacity="0" />
+                <stop offset="100%" stopColor="#0F172A" stopOpacity="0" />
               </radialGradient>
 
               {/* Intense CDO convective core (-60°C to -80°C BD curve) */}
               <radialGradient id="irCoreCold" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#FEF08A" stopOpacity="0.9" /> {/* Warm Eye center */}
-                <stop offset="15%" stopColor="#F43F5E" stopOpacity="0.95" /> {/* -75°C to -80°C Coldest Ring */}
-                <stop offset="35%" stopColor="#9333EA" stopOpacity="0.9" /> {/* -65°C */}
-                <stop offset="60%" stopColor="#2563EB" stopOpacity="0.85" /> {/* -50°C */}
-                <stop offset="85%" stopColor="#059669" stopOpacity="0.6" /> {/* -30°C */}
-                <stop offset="100%" stopColor="#0B1120" stopOpacity="0" />
+                <stop offset="0%" stopColor="#FEF08A" stopOpacity="0.9" />
+                <stop offset="15%" stopColor="#B91C1C" stopOpacity="0.95" />
+                <stop offset="35%" stopColor="#7C3AED" stopOpacity="0.9" />
+                <stop offset="60%" stopColor="#2563EB" stopOpacity="0.85" />
+                <stop offset="85%" stopColor="#059669" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#0F172A" stopOpacity="0" />
               </radialGradient>
             </defs>
 
             {/* Background Grid */}
-            <g stroke="#162235" strokeWidth="0.5" strokeDasharray="3,3">
+            <g stroke="#334155" strokeWidth="0.5" strokeDasharray="3,3">
               <line x1="50" y1="0" x2="50" y2="400" />
               <line x1="150" y1="0" x2="150" y2="400" />
               <line x1="250" y1="0" x2="250" y2="400" />
@@ -89,7 +88,7 @@ export const IRViewer: React.FC<IRViewerProps> = ({
             <path
               d="M 250 200 Q 180 140 140 220 Q 160 300 240 310 Q 320 300 340 240"
               fill="none"
-              stroke="#9333EA"
+              stroke="#7C3AED"
               strokeWidth="22"
               strokeLinecap="round"
               opacity="0.45"
@@ -106,12 +105,12 @@ export const IRViewer: React.FC<IRViewerProps> = ({
               r="14"
               fill="#FDE047"
               fillOpacity="0.4"
-              stroke="#F59E0B"
+              stroke="#B45309"
               strokeWidth="1.5"
             />
 
             {/* Storm Center Crosshair */}
-            <g stroke="#F8FAFC" strokeWidth="1" opacity="0.8">
+            <g stroke="#F1F5F9" strokeWidth="1" opacity="0.8">
               <line x1="230" y1="200" x2="270" y2="200" />
               <line x1="250" y1="180" x2="250" y2="220" />
               <circle cx="250" cy="200" r="22" fill="none" strokeDasharray="2,2" />
@@ -121,7 +120,7 @@ export const IRViewer: React.FC<IRViewerProps> = ({
             <text
               x="260"
               y="185"
-              fill="#FFFFFF"
+              fill="#F1F5F9"
               fontSize="10"
               fontFamily="monospace"
               fontWeight="bold"
@@ -132,7 +131,7 @@ export const IRViewer: React.FC<IRViewerProps> = ({
             <text
               x="260"
               y="225"
-              fill="#F43F5E"
+              fill="#B91C1C"
               fontSize="9"
               fontFamily="monospace"
             >
@@ -142,7 +141,7 @@ export const IRViewer: React.FC<IRViewerProps> = ({
         </div>
 
         {/* Bottom Dvorak/BD Enhanced Temperature Gradient Color Scale */}
-        <div className="p-2.5 bg-[#0B1120] border-t border-[#263449] flex flex-col gap-1 z-10 select-none">
+        <div className="p-2.5 bg-[#0F172A] border-t border-[#334155] flex flex-col gap-1 z-10 select-none">
           <div className="flex items-center justify-between text-[9px] font-mono text-[#94A3B8]">
             <span>-80°C (COLD / DEEP CONVECTION)</span>
             <span>-60°C</span>
@@ -153,55 +152,51 @@ export const IRViewer: React.FC<IRViewerProps> = ({
           </div>
 
           <div
-            className="h-3 w-full rounded-[2px] border border-[#263449]"
+            className="h-3 w-full rounded-[2px] border border-[#334155]"
             style={{
               background:
-                "linear-gradient(to right, #F43F5E 0%, #9333EA 20%, #2563EB 40%, #059669 60%, #F59E0B 80%, #FEF08A 100%)",
+                "linear-gradient(to right, #B91C1C 0%, #7C3AED 20%, #2563EB 40%, #059669 60%, #B45309 80%, #FEF08A 100%)",
             }}
           />
         </div>
       </div>
 
       {/* Right: Side Scientific Analytics Panel */}
-      <div className="w-full lg:w-80 bg-[#111827] border border-[#263449] rounded-[4px] p-3 flex flex-col justify-between text-xs font-mono space-y-3 shrink-0">
-        <div>
-          <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#263449]">
-            <span className="font-bold text-[#F8FAFC] tracking-wider uppercase">
+      <div className="w-full lg:w-80 bg-[#1E293B] border border-[#334155] rounded-[4px] p-3 pb-6 flex flex-col text-xs font-mono space-y-3 shrink-0">
+          <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#334155]">
+            <span className="font-bold text-[#F1F5F9] tracking-wider uppercase">
               IR THERMAL ANALYSIS
             </span>
-            <span className="text-[10px] text-[#22C55E]">✓ CALIBRATED</span>
+            <span className="text-[10px] text-[#15803D]">✓ CALIBRATED</span>
           </div>
 
           <div className="space-y-2">
-            <div className="p-2 bg-[#0B1120] border border-[#263449] rounded-[3px]">
+            <div className="p-2 bg-[#0F172A] border border-[#334155] rounded-[3px]">
               <span className="text-[10px] text-[#94A3B8] uppercase block">
                 MIN CLOUD-TOP TEMPERATURE
               </span>
-              <span className="text-xl font-bold text-[#38BDF8]">
+              <span className="text-xl font-bold text-[#0284C7]">
                 {metrics.cloudTopTempMinC}°C
               </span>
-              <span className="text-[10px] text-[#64748B] block mt-0.5">
+              <span className="text-[10px] text-[#94A3B8] block mt-0.5">
                 Mean CDO Temperature: {metrics.cloudTopTempMeanC}°C
               </span>
             </div>
 
-            <div className="p-2 bg-[#0B1120] border border-[#263449] rounded-[3px]">
+            <div className="p-2 bg-[#0F172A] border border-[#334155] rounded-[3px]">
               <span className="text-[10px] text-[#94A3B8] uppercase block">
                 CDO ENVELOPE AREA
               </span>
-              <span className="text-xl font-bold text-[#F8FAFC]">
+              <span className="text-xl font-bold text-[#F1F5F9]">
                 {metrics.cdoAreaKm2.toLocaleString()} km²
-              </span>
-              <span className="text-[10px] text-[#22C55E] block mt-0.5">
-                Threshold: TIR-1 Brightness Temp ≤ -62°C
               </span>
             </div>
 
-            <div className="p-2 bg-[#0B1120] border border-[#263449] rounded-[3px]">
+            <div className="p-2 bg-[#0F172A] border border-[#334155] rounded-[3px]">
               <span className="text-[10px] text-[#94A3B8] uppercase block">
                 EYE THERMAL SIGNATURE
               </span>
-              <span className="text-sm font-bold text-[#22C55E]">
+              <span className="text-sm font-bold text-[#15803D]">
                 {metrics.eyeDetected ? "✓ CLEAR EYE DETECTED" : "OBSCURED"}
               </span>
               {metrics.eyeTempC && (
@@ -211,20 +206,15 @@ export const IRViewer: React.FC<IRViewerProps> = ({
               )}
             </div>
 
-            <div className="p-2 bg-[#0B1120] border border-[#263449] rounded-[3px]">
+            <div className="p-2 bg-[#0F172A] border border-[#334155] rounded-[3px]">
               <span className="text-[10px] text-[#94A3B8] uppercase block">
                 CONVECTIVE ORGANIZATION
               </span>
-              <span className="text-sm font-bold text-[#F43F5E]">
+              <span className="text-sm font-bold text-[#B91C1C]">
                 {metrics.convectionStrength} (SYMMETRIC EYERING)
               </span>
             </div>
           </div>
-        </div>
-
-        <div className="p-2 bg-[#070B14] border border-[#1E293B] rounded-[3px] text-[10px] text-[#64748B]">
-          Calibrated using BD-curve enhancement standard for tropical cyclone Dvorak analysis.
-        </div>
       </div>
     </div>
   );

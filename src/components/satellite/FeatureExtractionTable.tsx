@@ -2,8 +2,7 @@
 
 import React from "react";
 import { CycloneObservation } from "@/types/cyclone";
-import { Table, Layers, ArrowUpRight } from "lucide-react";
-import { ScientificTooltip } from "../ui/ScientificTooltip";
+import { Layers } from "lucide-react";
 
 interface FeatureExtractionTableProps {
   observation: CycloneObservation;
@@ -123,23 +122,23 @@ export const FeatureExtractionTable: React.FC<FeatureExtractionTableProps> = ({
   ];
 
   return (
-    <div className="bg-[#111827] border border-[#263449] rounded-[4px] overflow-hidden text-xs font-mono">
-      <div className="px-3 py-2 bg-[#0B1120] border-b border-[#263449] flex items-center justify-between">
+    <div className="bg-[#1E293B] border border-[#334155] rounded-[4px] overflow-hidden text-xs font-mono">
+      <div className="px-3 py-2 bg-[#0F172A] border-b border-[#334155] flex items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <Layers className="w-3.5 h-3.5 text-[#38BDF8]" />
-          <span className="font-bold text-[#F8FAFC] tracking-wider uppercase">
+          <Layers className="w-3.5 h-3.5 text-[#0284C7]" />
+          <span className="font-bold text-[#F1F5F9] tracking-wider uppercase">
             EXTRACTED METEOROLOGICAL PARAMETERS & DESCRIPTORS
           </span>
         </div>
-        <span className="text-[10px] text-[#64748B]">
+        <span className="text-[10px] text-[#94A3B8]">
           15 METRIC REGISTRY
         </span>
       </div>
 
       <div className="max-h-72 overflow-y-auto">
         <table className="w-full text-left text-[11px] font-mono border-collapse">
-          <thead className="bg-[#070B14] sticky top-0 z-10">
-            <tr className="border-b border-[#263449] text-[#64748B] text-[10px] uppercase">
+          <thead className="bg-[#0F172A] sticky top-0 z-10">
+            <tr className="border-b border-[#334155] text-[#94A3B8] text-[10px] uppercase">
               <th className="py-2 px-3 font-normal">METEOROLOGICAL PARAMETER</th>
               <th className="py-2 px-3 font-normal">EXTRACTED VALUE</th>
               <th className="py-2 px-3 font-normal">UNIT</th>
@@ -147,19 +146,19 @@ export const FeatureExtractionTable: React.FC<FeatureExtractionTableProps> = ({
               <th className="py-2 px-3 font-normal">STATUS</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#1E293B]">
+          <tbody className="divide-y divide-[#334155]">
             {features.map((f, idx) => (
-              <tr key={idx} className="hover:bg-[#172033]/60 transition-colors">
-                <td className="py-2 px-3 font-medium text-[#F8FAFC]">
+              <tr key={idx} className="hover:bg-[#0F172A]/50 transition-colors">
+                <td className="py-2 px-3 font-medium text-[#F1F5F9]">
                   {f.param}
                 </td>
-                <td className="py-2 px-3 font-bold text-[#38BDF8]">
+                <td className="py-2 px-3 font-bold text-[#0284C7]">
                   {f.value}
                 </td>
                 <td className="py-2 px-3 text-[#94A3B8]">{f.unit}</td>
-                <td className="py-2 px-3 text-[#CBD5E1] text-[10px]">{f.method}</td>
+                <td className="py-2 px-3 text-[#94A3B8] text-[10px]">{f.method}</td>
                 <td className="py-2 px-3">
-                  <span className="px-1.5 py-0.5 bg-[#062419] text-[#22C55E] border border-[#134E35] rounded-[2px] text-[9px]">
+                  <span className="px-1.5 py-0.5 bg-[#15803D]/15 text-[#15803D] border border-[#15803D]/30 rounded-[2px] text-[9px] font-bold">
                     {f.status}
                   </span>
                 </td>

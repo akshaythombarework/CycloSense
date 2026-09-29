@@ -29,16 +29,16 @@ export const ScientificMetric: React.FC<ScientificMetricProps> = ({
   alertColor = "none",
   className = "",
 }) => {
-  let valueColor = "text-[#F8FAFC]";
-  if (alertColor === "critical") valueColor = "text-[#F43F5E]";
-  else if (alertColor === "warning") valueColor = "text-[#F59E0B]";
-  else if (alertColor === "normal") valueColor = "text-[#22C55E]";
-  else if (alertColor === "info") valueColor = "text-[#38BDF8]";
+  let valueColor = "text-[#F1F5F9]";
+  if (alertColor === "critical") valueColor = "text-[#B91C1C]";
+  else if (alertColor === "warning") valueColor = "text-[#B45309]";
+  else if (alertColor === "normal") valueColor = "text-[#15803D]";
+  else if (alertColor === "info") valueColor = "text-[#0284C7]";
 
   return (
     <div
-      className={`p-2.5 bg-[#111827] border ${
-        highlight ? "border-[#38BDF8]/60 bg-[#172033]" : "border-[#263449]"
+      className={`p-2.5 bg-[#0F172A] border ${
+        highlight ? "border-[#3B82F6]/60 bg-[#1E293B]" : "border-[#334155]"
       } rounded-[4px] flex flex-col justify-between transition-colors ${className}`}
     >
       <div className="flex items-center justify-between gap-1 mb-1">
@@ -62,7 +62,7 @@ export const ScientificMetric: React.FC<ScientificMetricProps> = ({
       </div>
 
       {subValue && (
-        <div className="mt-1 text-[11px] font-mono text-[#64748B] flex items-center justify-between border-t border-[#1E293B] pt-1">
+        <div className="mt-1 text-[11px] font-mono text-[#94A3B8] flex items-center justify-between border-t border-[#334155] pt-1">
           <span>{subValue}</span>
         </div>
       )}

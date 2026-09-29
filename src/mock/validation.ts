@@ -200,7 +200,7 @@ export const MOCK_VALIDATION_METRICS: ValidationMetric[] = [
 export const MOCK_MODEL_BENCHMARKS: ModelPerformanceBenchmark[] = [
   {
     modelName: "CycloneAI-FusionNet (Proposed)",
-    version: "v0.1.0-alpha",
+    version: "v1.0",
     detectionPrecision: 0.942,
     detectionRecall: 0.928,
     detectionF1: 0.935,

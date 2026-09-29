@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { HistoricalCase } from "@/types/validation";
 import { PredictionVsReference } from "./PredictionVsReference";
-import { History, Filter, Search, Compass, CheckCircle2, ChevronRight, Play } from "lucide-react";
-import { StatusBadge } from "../ui/StatusBadge";
+import { History, Filter, Search } from "lucide-react";
 
 interface HistoricalValidationViewProps {
   cases: HistoricalCase[];
@@ -34,22 +33,22 @@ export const HistoricalValidationView: React.FC<HistoricalValidationViewProps> =
   const activeCase = cases.find((c) => c.id === selectedCaseId) || cases[0];
 
   return (
-    <div className="flex-1 flex flex-col p-3 gap-3 overflow-y-auto bg-[#0B1120]">
+    <div className="flex-1 flex flex-col p-3 gap-3 overflow-y-auto bg-[#0F172A]">
       {/* Top Filter Toolbar */}
-      <div className="bg-[#111827] border border-[#263449] p-2.5 rounded-[4px] flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+      <div className="bg-[#1E293B] border border-[#334155] p-2.5 rounded-[4px] flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-1.5 text-[#38BDF8] font-bold">
+          <div className="flex items-center gap-1.5 text-[#0284C7] font-bold">
             <Filter className="w-3.5 h-3.5" />
             <span>ARCHIVE FILTERS:</span>
           </div>
 
           {/* Basin Filter */}
           <div className="flex items-center gap-1">
-            <span className="text-[10px] text-[#64748B]">BASIN:</span>
+            <span className="text-[10px] text-[#94A3B8]">BASIN:</span>
             <select
               value={selectedBasin}
               onChange={(e) => setSelectedBasin(e.target.value)}
-              className="bg-[#0B1120] border border-[#263449] rounded px-2 py-1 text-xs text-[#CBD5E1] outline-none"
+              className="bg-[#0F172A] border border-[#334155] rounded px-2 py-1 text-xs text-[#F1F5F9] outline-none"
             >
               <option value="ALL">All North Indian Ocean</option>
               <option value="Bay of Bengal">Bay of Bengal</option>
@@ -59,11 +58,11 @@ export const HistoricalValidationView: React.FC<HistoricalValidationViewProps> =
 
           {/* Year Filter */}
           <div className="flex items-center gap-1">
-            <span className="text-[10px] text-[#64748B]">YEAR:</span>
+            <span className="text-[10px] text-[#94A3B8]">YEAR:</span>
             <select
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
-              className="bg-[#0B1120] border border-[#263449] rounded px-2 py-1 text-xs text-[#CBD5E1] outline-none"
+              className="bg-[#0F172A] border border-[#334155] rounded px-2 py-1 text-xs text-[#F1F5F9] outline-none"
             >
               <option value="ALL">All Seasons</option>
               <option value="2024">2024</option>
@@ -75,24 +74,24 @@ export const HistoricalValidationView: React.FC<HistoricalValidationViewProps> =
         </div>
 
         {/* Search input */}
-        <div className="flex items-center gap-1.5 bg-[#0B1120] border border-[#263449] rounded px-2 py-1">
-          <Search className="w-3.5 h-3.5 text-[#64748B]" />
+        <div className="flex items-center gap-1.5 bg-[#0F172A] border border-[#334155] rounded px-2 py-1">
+          <Search className="w-3.5 h-3.5 text-[#94A3B8]" />
           <input
             type="text"
             placeholder="Search cyclone name, landfall..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-transparent border-none outline-none text-xs font-mono text-[#F8FAFC] placeholder-[#64748B] w-48"
+            className="bg-transparent border-none outline-none text-xs font-mono text-[#F1F5F9] placeholder-[#94A3B8] w-48"
           />
         </div>
       </div>
 
       {/* Historical Cases Archive Table */}
-      <div className="bg-[#111827] border border-[#263449] rounded-[4px] overflow-hidden text-xs font-mono">
-        <div className="px-3 py-2 bg-[#0B1120] border-b border-[#263449] flex items-center justify-between">
+      <div className="bg-[#1E293B] border border-[#334155] rounded-[4px] overflow-hidden text-xs font-mono">
+        <div className="px-3 py-2 bg-[#0F172A] border-b border-[#334155] flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <History className="w-3.5 h-3.5 text-[#A78BFA]" />
-            <span className="font-bold text-[#F8FAFC] tracking-wider uppercase">
+            <History className="w-3.5 h-3.5 text-[#3B82F6]" />
+            <span className="font-bold text-[#F1F5F9] tracking-wider uppercase">
               HISTORICAL CYCLONE CASE ARCHIVE & GROUND TRUTH BEST TRACK
             </span>
           </div>
@@ -103,8 +102,8 @@ export const HistoricalValidationView: React.FC<HistoricalValidationViewProps> =
 
         <div className="overflow-x-auto max-h-60">
           <table className="w-full text-left text-[11px] font-mono border-collapse">
-            <thead className="bg-[#070B14] sticky top-0 z-10">
-              <tr className="border-b border-[#263449] text-[#64748B] text-[10px] uppercase">
+            <thead className="bg-[#0F172A] sticky top-0 z-10">
+              <tr className="border-b border-[#334155] text-[#94A3B8] text-[10px] uppercase">
                 <th className="py-2 px-3 font-normal">HISTORICAL CYCLONE</th>
                 <th className="py-2 px-3 font-normal">YEAR</th>
                 <th className="py-2 px-3 font-normal">BASIN</th>
@@ -116,7 +115,7 @@ export const HistoricalValidationView: React.FC<HistoricalValidationViewProps> =
                 <th className="py-2 px-3 font-normal">ACTION</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#1E293B]">
+            <tbody className="divide-y divide-[#334155]">
               {filteredCases.map((c) => {
                 const isSelected = c.id === selectedCaseId;
 
@@ -125,22 +124,30 @@ export const HistoricalValidationView: React.FC<HistoricalValidationViewProps> =
                     key={c.id}
                     onClick={() => setSelectedCaseId(c.id)}
                     className={`cursor-pointer transition-colors ${
-                      isSelected ? "bg-[#1E293B] text-[#F8FAFC]" : "hover:bg-[#172033]/60"
+                      isSelected ? "bg-[#0F172A] text-[#F1F5F9]" : "hover:bg-[#0F172A]/50"
                     }`}
                   >
-                    <td className="py-2.5 px-3 font-bold text-[#F8FAFC] flex items-center gap-1.5">
-                      <span className={`w-2 h-2 rounded-full ${isSelected ? "bg-[#38BDF8]" : "bg-[#64748B]"}`} />
+                    <td className="py-2.5 px-3 font-bold text-[#F1F5F9] flex items-center gap-1.5">
+                      <span className={`w-2 h-2 rounded-full ${isSelected ? "bg-[#0284C7]" : "bg-[#94A3B8]"}`} />
                       {c.name}
                     </td>
-                    <td className="py-2.5 px-3 text-[#CBD5E1]">{c.year}</td>
-                    <td className="py-2.5 px-3 text-[#38BDF8]">{c.basin}</td>
-                    <td className="py-2.5 px-3 font-bold text-[#F43F5E]">{c.peakWindKts} kt</td>
+                    <td className="py-2.5 px-3 text-[#94A3B8]">{c.year}</td>
+                    <td className="py-2.5 px-3 text-[#0284C7]">{c.basin}</td>
+                    <td className={`py-2.5 px-3 font-bold ${c.peakWindKts >= 140 ? "text-[#B91C1C]" : "text-[#B45309]"}`}>
+                      {c.peakWindKts} kt
+                    </td>
                     <td className="py-2.5 px-3 text-[#94A3B8]">{c.lowestPressureHpa} hPa</td>
-                    <td className="py-2.5 px-3 text-[#CBD5E1]">{c.landfallLocation}</td>
-                    <td className="py-2.5 px-3 font-bold text-[#22C55E]">{c.aiTrackMaeKm} km</td>
-                    <td className="py-2.5 px-3 font-bold text-[#22C55E]">{c.aiIntensityMaeKts} kt</td>
+                    <td className="py-2.5 px-3 text-[#94A3B8]">{c.landfallLocation}</td>
+                    <td className="py-2.5 px-3 font-bold text-[#15803D]">{c.aiTrackMaeKm} km</td>
+                    <td className="py-2.5 px-3 font-bold text-[#15803D]">{c.aiIntensityMaeKts} kt</td>
                     <td className="py-2.5 px-3">
-                      <span className="px-2 py-0.5 bg-[#0B1120] hover:bg-[#1E40AF] border border-[#263449] rounded text-[10px] text-[#38BDF8] hover:text-white transition-colors">
+                      <span
+                        className={`px-2 py-0.5 rounded text-[10px] transition-colors border ${
+                          isSelected
+                            ? "bg-[#3B82F6] text-white border-[#3B82F6] font-bold"
+                            : "bg-[#0F172A] hover:bg-[#1E293B] border-[#334155] text-[#94A3B8] hover:text-[#F1F5F9]"
+                        }`}
+                      >
                         INSPECT
                       </span>
                     </td>

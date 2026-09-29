@@ -2,7 +2,7 @@
 
 import React from "react";
 import { AIEvent } from "@/types/cyclone";
-import { Zap, AlertTriangle, ShieldCheck, ChevronRight } from "lucide-react";
+import { Zap, ChevronRight } from "lucide-react";
 import { StatusBadge } from "../ui/StatusBadge";
 
 interface RecentEventsPanelProps {
@@ -15,18 +15,18 @@ export const RecentEventsPanel: React.FC<RecentEventsPanelProps> = ({
   onOpenEventsDrawer,
 }) => {
   return (
-    <div className="bg-[#111827] border border-[#263449] rounded-[4px] flex flex-col h-full overflow-hidden">
+    <div className="bg-[#1E293B] border border-[#334155] rounded-[4px] flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="px-3 py-2 bg-[#0B1120] border-b border-[#263449] flex items-center justify-between">
+      <div className="px-3 py-2 bg-[#0F172A] border-b border-[#334155] flex items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <Zap className="w-3.5 h-3.5 text-[#F43F5E]" />
-          <h3 className="text-xs font-mono font-bold text-[#F8FAFC] tracking-wider uppercase">
-            AI EVENTS & SIGNALS
+          <Zap className="w-3.5 h-3.5 text-[#B91C1C]" />
+          <h3 className="text-xs font-mono font-bold text-[#F1F5F9] tracking-wider uppercase">
+            ALERTS & NOTIFICATIONS
           </h3>
         </div>
         <button
           onClick={onOpenEventsDrawer}
-          className="text-[10px] font-mono text-[#38BDF8] hover:text-[#60A5FA] flex items-center gap-0.5 transition-colors"
+          className="text-[10px] font-mono text-[#0284C7] hover:text-[#3B82F6] flex items-center gap-0.5 transition-colors"
         >
           VIEW ALL <ChevronRight className="w-3 h-3" />
         </button>
@@ -38,7 +38,7 @@ export const RecentEventsPanel: React.FC<RecentEventsPanelProps> = ({
           return (
             <div
               key={evt.id}
-              className="p-2 bg-[#0B1120] hover:bg-[#172033] border border-[#263449] rounded-[3px] space-y-1 transition-colors"
+              className="p-2.5 bg-[#0F172A]/60 hover:bg-[#0F172A] border border-[#334155] rounded-[4px] space-y-1 transition-colors"
             >
               <div className="flex items-center justify-between gap-1">
                 <StatusBadge status={evt.severity} label={evt.severity} size="sm" />
@@ -47,7 +47,7 @@ export const RecentEventsPanel: React.FC<RecentEventsPanelProps> = ({
                 </span>
               </div>
 
-              <div className="text-xs font-mono font-semibold text-[#F8FAFC]">
+              <div className="text-xs font-mono font-bold text-[#F1F5F9]">
                 {evt.title}
               </div>
 
@@ -55,11 +55,11 @@ export const RecentEventsPanel: React.FC<RecentEventsPanelProps> = ({
                 {evt.description}
               </p>
 
-              <div className="flex items-center justify-between pt-1 border-t border-[#1E293B] text-[10px] font-mono">
-                <span className="text-[#64748B]">{evt.cycloneName}</span>
+              <div className="flex items-center justify-between pt-1 border-t border-[#334155] text-[10px] font-mono">
+                <span className="text-[#94A3B8]">{evt.cycloneName}</span>
                 {evt.confidencePercent && (
-                  <span className="text-[#38BDF8]">
-                    CONF: <strong>{evt.confidencePercent}%</strong>
+                  <span className="text-[#94A3B8]">
+                    CONF: <strong className="text-[#F1F5F9]">{evt.confidencePercent}%</strong>
                   </span>
                 )}
               </div>

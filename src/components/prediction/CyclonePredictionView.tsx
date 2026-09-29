@@ -7,7 +7,7 @@ import { TrackPredictionTab } from "./TrackPredictionTab";
 import { IntensityPredictionChart } from "./IntensityPredictionChart";
 import { PatternEvolutionGrid } from "./PatternEvolutionGrid";
 import { ExplainabilitySection } from "./ExplainabilitySection";
-import { Compass, TrendingUp, Layers, Cpu, ShieldAlert, Radio } from "lucide-react";
+import { Compass, TrendingUp, Layers } from "lucide-react";
 
 interface CyclonePredictionViewProps {
   cyclone: ActiveCyclone;
@@ -37,17 +37,17 @@ export const CyclonePredictionView: React.FC<CyclonePredictionViewProps> = ({
   const setSelectedPoint = onSelectForecastPoint || setLocalSelectedPoint;
 
   return (
-    <div className="flex-1 flex flex-col p-3 gap-3 overflow-y-auto bg-[#0B1120]">
+    <div className="flex-1 flex flex-col p-3 gap-3 overflow-y-auto bg-[#0F172A]">
       {/* Top Controls Bar: Sub-tabs & Scope */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#111827] border border-[#263449] p-2.5 rounded-[4px]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#1E293B] border border-[#334155] p-2.5 rounded-[4px]">
         {/* Prediction Navigation Tabs */}
-        <div className="flex items-center gap-1 bg-[#0B1120] p-1 border border-[#263449] rounded-[4px] select-none">
+        <div className="flex items-center gap-1 bg-[#0F172A] p-1 border border-[#334155] rounded-[4px] select-none">
           <button
             onClick={() => setActiveTab("track")}
             className={`px-3 py-1.5 rounded-[3px] text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "track"
-                ? "bg-[#1E293B] text-[#38BDF8] border border-[#38BDF8]/60 shadow"
-                : "text-[#94A3B8] hover:text-[#F8FAFC]"
+                ? "bg-[#1E293B] text-[#0284C7] border border-[#0284C7]/60 shadow"
+                : "text-[#94A3B8] hover:text-[#F1F5F9]"
             }`}
           >
             <Compass className="w-3.5 h-3.5" />
@@ -58,8 +58,8 @@ export const CyclonePredictionView: React.FC<CyclonePredictionViewProps> = ({
             onClick={() => setActiveTab("intensity")}
             className={`px-3 py-1.5 rounded-[3px] text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "intensity"
-                ? "bg-[#1E293B] text-[#60A5FA] border border-[#60A5FA]/60 shadow"
-                : "text-[#94A3B8] hover:text-[#F8FAFC]"
+                ? "bg-[#1E293B] text-[#3B82F6] border border-[#3B82F6]/60 shadow"
+                : "text-[#94A3B8] hover:text-[#F1F5F9]"
             }`}
           >
             <TrendingUp className="w-3.5 h-3.5" />
@@ -70,8 +70,8 @@ export const CyclonePredictionView: React.FC<CyclonePredictionViewProps> = ({
             onClick={() => setActiveTab("pattern")}
             className={`px-3 py-1.5 rounded-[3px] text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "pattern"
-                ? "bg-[#1E293B] text-[#A78BFA] border border-[#A78BFA]/60 shadow"
-                : "text-[#94A3B8] hover:text-[#F8FAFC]"
+                ? "bg-[#1E293B] text-[#3B82F6] border border-[#3B82F6]/60 shadow"
+                : "text-[#94A3B8] hover:text-[#F1F5F9]"
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -81,12 +81,12 @@ export const CyclonePredictionView: React.FC<CyclonePredictionViewProps> = ({
 
         {/* Cyclone Status Info */}
         <div className="flex items-center gap-2 text-xs font-mono">
-          <span className="text-[#64748B]">SYSTEM:</span>
-          <span className="font-bold text-[#F8FAFC]">
+          <span className="text-[#94A3B8]">SYSTEM:</span>
+          <span className="font-bold text-[#F1F5F9]">
             {cyclone.name} ({cyclone.code})
           </span>
-          <span className="text-[#64748B]">|</span>
-          <span className="text-[#F43F5E] font-bold">
+          <span className="text-[#334155]">|</span>
+          <span className="text-[#B91C1C] font-bold">
             {cyclone.maxSustainedWindKts} kt • {cyclone.currentCategory}
           </span>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ActiveCyclone, CycloneObservation } from "@/types/cyclone";
+import { ActiveCyclone } from "@/types/cyclone";
 import { SpectralBand } from "@/types/satellite";
 import { IRViewer } from "./IRViewer";
 import { VisibleViewer } from "./VisibleViewer";
@@ -12,7 +12,7 @@ import { FeatureExtractionTable } from "./FeatureExtractionTable";
 import { TimelineSlider, TimeOffset } from "../temporal/TimelineSlider";
 import { EvolutionMetricsPanel } from "../temporal/EvolutionMetricsPanel";
 import { satelliteService } from "@/services/satelliteService";
-import { Layers, Activity, Eye, Radio, Cpu, ShieldCheck } from "lucide-react";
+import { Activity, Eye, Radio, Cpu } from "lucide-react";
 
 interface SatelliteAnalysisViewProps {
   cyclone: ActiveCyclone;
@@ -53,17 +53,17 @@ export const SatelliteAnalysisView: React.FC<SatelliteAnalysisViewProps> = ({
   const qualityReport = satelliteService.getDataQualityReport();
 
   return (
-    <div className="flex-1 flex flex-col p-3 gap-3 overflow-y-auto bg-[#0B1120]">
+    <div className="flex-1 flex flex-col p-3 gap-3 overflow-y-auto bg-[#0F172A]">
       {/* Top Header Controls: Spectral Tabs & Synchronized Timeline Bar */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 bg-[#111827] border border-[#263449] p-2.5 rounded-[4px]">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 bg-[#1E293B] border border-[#334155] p-2.5 rounded-[4px]">
         {/* Spectral Band Switcher */}
-        <div className="flex items-center gap-1 bg-[#0B1120] p-1 border border-[#263449] rounded-[4px] select-none">
+        <div className="flex items-center gap-1 bg-[#0F172A] p-1 border border-[#334155] rounded-[4px] select-none">
           <button
             onClick={() => setActiveBand("IR")}
             className={`px-3 py-1.5 rounded-[3px] text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
               activeBand === "IR"
-                ? "bg-[#1E293B] text-[#38BDF8] border border-[#38BDF8]/60 shadow"
-                : "text-[#94A3B8] hover:text-[#F8FAFC]"
+                ? "bg-[#1E293B] text-[#0284C7] border border-[#0284C7]/60 shadow"
+                : "text-[#94A3B8] hover:text-[#F1F5F9]"
             }`}
           >
             <Activity className="w-3.5 h-3.5" />
@@ -74,8 +74,8 @@ export const SatelliteAnalysisView: React.FC<SatelliteAnalysisViewProps> = ({
             onClick={() => setActiveBand("VISIBLE")}
             className={`px-3 py-1.5 rounded-[3px] text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
               activeBand === "VISIBLE"
-                ? "bg-[#1E293B] text-[#F59E0B] border border-[#F59E0B]/60 shadow"
-                : "text-[#94A3B8] hover:text-[#F8FAFC]"
+                ? "bg-[#1E293B] text-[#B45309] border border-[#B45309]/60 shadow"
+                : "text-[#94A3B8] hover:text-[#F1F5F9]"
             }`}
           >
             <Eye className="w-3.5 h-3.5" />
@@ -86,8 +86,8 @@ export const SatelliteAnalysisView: React.FC<SatelliteAnalysisViewProps> = ({
             onClick={() => setActiveBand("MICROWAVE")}
             className={`px-3 py-1.5 rounded-[3px] text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
               activeBand === "MICROWAVE"
-                ? "bg-[#1E293B] text-[#A78BFA] border border-[#A78BFA]/60 shadow"
-                : "text-[#94A3B8] hover:text-[#F8FAFC]"
+                ? "bg-[#1E293B] text-[#3B82F6] border border-[#3B82F6]/60 shadow"
+                : "text-[#94A3B8] hover:text-[#F1F5F9]"
             }`}
           >
             <Radio className="w-3.5 h-3.5" />
@@ -98,33 +98,34 @@ export const SatelliteAnalysisView: React.FC<SatelliteAnalysisViewProps> = ({
             onClick={() => setActiveBand("FUSED")}
             className={`px-3 py-1.5 rounded-[3px] text-xs font-mono font-bold transition-all flex items-center gap-1.5 ${
               activeBand === "FUSED"
-                ? "bg-[#1E40AF] text-white border border-[#60A5FA] shadow"
-                : "text-[#94A3B8] hover:text-[#F8FAFC]"
+                ? "bg-[#3B82F6] text-white border border-[#3B82F6] shadow"
+                : "text-[#94A3B8] hover:text-[#F1F5F9]"
             }`}
           >
-            <Cpu className="w-3.5 h-3.5 text-[#38BDF8]" />
-            <span>AI FUSED SYNTHESIS</span>
+            <Cpu className="w-3.5 h-3.5 text-[#0284C7]" />
+            <span>FUSED SYNTHESIS</span>
           </button>
         </div>
 
         {/* Selected Target Cyclone Summary */}
         <div className="flex items-center gap-2 text-xs font-mono">
-          <span className="text-[#64748B]">TARGET:</span>
-          <span className="font-bold text-[#F8FAFC]">
+          <span className="text-[#94A3B8]">TARGET:</span>
+          <span className="font-bold text-[#F1F5F9]">
             {cyclone.name} ({cyclone.code})
           </span>
-          <span className="text-[#64748B]">|</span>
-          <span className="text-[#38BDF8]">
+          <span className="text-[#334155]">|</span>
+          <span className="text-[#0284C7]">
             {currentObs.coordinate.formattedLat} • {currentObs.coordinate.formattedLon}
           </span>
         </div>
       </div>
 
-      {/* Synchronized Temporal Timeline Bar */}
+      {/* Synchronized Temporal Timeline Bar — auto-plays on mount */}
       <TimelineSlider
         currentOffset={selectedTimeOffset}
         onSelectOffset={setSelectedTimeOffset}
         timestamps={timestampsMap}
+        autoPlay={true}
       />
 
       {/* Main Satellite Multi-Spectral Viewer Area */}

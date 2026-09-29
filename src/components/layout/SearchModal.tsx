@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, X, Compass, History, Radio, MapPin, Database } from "lucide-react";
+import { Search, X, Compass, History } from "lucide-react";
 import { MOCK_ACTIVE_CYCLONES } from "@/mock/cyclones";
 import { MOCK_HISTORICAL_CASES } from "@/mock/validation";
 import { NavTabId } from "./Sidebar";
@@ -38,23 +38,23 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-black/60 backdrop-blur-[2px]">
-      <div className="w-full max-w-xl bg-[#111827] border border-[#334155] rounded-[6px] shadow-2xl overflow-hidden animate-in fade-in-0 zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-[9999] flex items-start justify-center pt-20 bg-black/70 backdrop-blur-[3px]">
+      <div className="w-full max-w-xl bg-[#1E293B] border border-[#334155] rounded-[6px] shadow-2xl overflow-hidden animate-in fade-in-0 zoom-in-95 duration-150">
         {/* Input bar */}
-        <div className="p-3 border-b border-[#263449] flex items-center gap-2 bg-[#0B1120]">
-          <Search className="w-4 h-4 text-[#64748B]" />
+        <div className="p-3 border-b border-[#334155] flex items-center gap-2 bg-[#0F172A]">
+          <Search className="w-4 h-4 text-[#94A3B8]" />
           <input
             type="text"
             placeholder="Search active cyclones, historical archives, sensor feeds, coordinates..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
-            className="flex-1 bg-transparent border-none outline-none text-xs font-mono text-[#F8FAFC] placeholder-[#64748B]"
+            className="flex-1 bg-transparent border-none outline-none text-xs font-mono text-[#F1F5F9] placeholder-[#94A3B8]"
           />
-          <kbd className="text-[10px] font-mono px-1.5 py-0.5 bg-[#172033] border border-[#263449] rounded text-[#94A3B8]">
+          <kbd className="text-[10px] font-mono px-1.5 py-0.5 bg-[#0F172A] border border-[#334155] rounded text-[#94A3B8]">
             ESC
           </kbd>
-          <button onClick={onClose} className="p-1 text-[#64748B] hover:text-[#CBD5E1]">
+          <button onClick={onClose} className="p-1 text-[#94A3B8] hover:text-[#F1F5F9]">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -63,7 +63,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         <div className="max-h-96 overflow-y-auto p-3 space-y-4">
           {/* Active Systems */}
           <div>
-            <span className="text-[10px] font-mono text-[#64748B] uppercase tracking-wider block mb-1.5">
+            <span className="text-[10px] font-mono text-[#94A3B8] uppercase tracking-wider block mb-1.5">
               ACTIVE CYCLONIC SYSTEMS
             </span>
             <div className="space-y-1">
@@ -75,18 +75,18 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                     onNavigateTab("mission-control");
                     onClose();
                   }}
-                  className="w-full p-2 bg-[#0B1120] hover:bg-[#172033] border border-[#263449] hover:border-[#38BDF8] rounded-[4px] flex items-center justify-between text-left transition-colors"
+                  className="w-full p-2 bg-[#0F172A] hover:bg-[#0F172A]/80 border border-[#334155] hover:border-[#3B82F6] rounded-[4px] flex items-center justify-between text-left transition-colors"
                 >
                   <div className="flex items-center gap-2">
-                    <Compass className="w-3.5 h-3.5 text-[#38BDF8]" />
-                    <span className="text-xs font-mono font-bold text-[#F8FAFC]">
+                    <Compass className="w-3.5 h-3.5 text-[#0284C7]" />
+                    <span className="text-xs font-mono font-bold text-[#F1F5F9]">
                       {c.name} ({c.code})
                     </span>
-                    <span className="text-[10px] font-mono text-[#94A3B8] px-1.5 py-0.2 bg-[#172033] rounded">
+                    <span className="text-[10px] font-mono text-[#94A3B8] px-1.5 py-0.5 bg-[#1E293B] rounded">
                       {c.currentCategory}
                     </span>
                   </div>
-                  <div className="text-xs font-mono text-[#CBD5E1]">
+                  <div className="text-xs font-mono text-[#94A3B8]">
                     {c.maxSustainedWindKts} kt • {c.currentCoord.formattedLat}
                   </div>
                 </button>
@@ -96,7 +96,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
           {/* Historical Cases */}
           <div>
-            <span className="text-[10px] font-mono text-[#64748B] uppercase tracking-wider block mb-1.5">
+            <span className="text-[10px] font-mono text-[#94A3B8] uppercase tracking-wider block mb-1.5">
               HISTORICAL BEST TRACK ARCHIVE
             </span>
             <div className="space-y-1">
@@ -107,11 +107,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                     onNavigateTab("historical-cases");
                     onClose();
                   }}
-                  className="w-full p-2 bg-[#0B1120] hover:bg-[#172033] border border-[#263449] hover:border-[#A78BFA] rounded-[4px] flex items-center justify-between text-left transition-colors"
+                  className="w-full p-2 bg-[#0F172A] hover:bg-[#0F172A]/80 border border-[#334155] hover:border-[#3B82F6] rounded-[4px] flex items-center justify-between text-left transition-colors"
                 >
                   <div className="flex items-center gap-2">
-                    <History className="w-3.5 h-3.5 text-[#A78BFA]" />
-                    <span className="text-xs font-mono font-medium text-[#F8FAFC]">
+                    <History className="w-3.5 h-3.5 text-[#3B82F6]" />
+                    <span className="text-xs font-mono font-medium text-[#F1F5F9]">
                       {h.name} ({h.year})
                     </span>
                   </div>
@@ -124,8 +124,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           </div>
 
           {/* Quick Navigation Short-links */}
-          <div className="pt-2 border-t border-[#263449]">
-            <span className="text-[10px] font-mono text-[#64748B] uppercase tracking-wider block mb-1.5">
+          <div className="pt-2 border-t border-[#334155]">
+            <span className="text-[10px] font-mono text-[#94A3B8] uppercase tracking-wider block mb-1.5">
               SYSTEM WORKSPACES
             </span>
             <div className="grid grid-cols-2 gap-2 text-xs font-mono">
@@ -134,7 +134,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   onNavigateTab("satellite-analysis");
                   onClose();
                 }}
-                className="p-2 bg-[#0B1120] hover:bg-[#172033] border border-[#263449] rounded text-left text-[#CBD5E1] hover:text-[#38BDF8]"
+                className="p-2 bg-[#0F172A] hover:bg-[#0F172A]/80 border border-[#334155] rounded text-left text-[#94A3B8] hover:text-[#0284C7]"
               >
                 📡 Satellite Multi-Source Analysis
               </button>
@@ -143,7 +143,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   onNavigateTab("cyclone-prediction");
                   onClose();
                 }}
-                className="p-2 bg-[#0B1120] hover:bg-[#172033] border border-[#263449] rounded text-left text-[#CBD5E1] hover:text-[#60A5FA]"
+                className="p-2 bg-[#0F172A] hover:bg-[#0F172A]/80 border border-[#334155] rounded text-left text-[#94A3B8] hover:text-[#3B82F6]"
               >
                 📈 Prediction & Uncertainty Cone
               </button>
@@ -152,18 +152,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   onNavigateTab("model-performance");
                   onClose();
                 }}
-                className="p-2 bg-[#0B1120] hover:bg-[#172033] border border-[#263449] rounded text-left text-[#CBD5E1] hover:text-[#22C55E]"
+                className="p-2 bg-[#0F172A] hover:bg-[#0F172A]/80 border border-[#334155] rounded text-left text-[#94A3B8] hover:text-[#15803D]"
               >
-                📊 Model Benchmarks & F1 Metrics
-              </button>
-              <button
-                onClick={() => {
-                  onNavigateTab("data-sources");
-                  onClose();
-                }}
-                className="p-2 bg-[#0B1120] hover:bg-[#172033] border border-[#263449] rounded text-left text-[#CBD5E1] hover:text-[#F59E0B]"
-              >
-                🗄 Data Sources & Telemetry
+                📊 Model Benchmarks & Metrics
               </button>
             </div>
           </div>

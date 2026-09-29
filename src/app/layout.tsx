@@ -16,8 +16,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CYCLONE AI — North Indian Ocean Tropical Cyclone Intelligence & Prediction Platform",
-  description: "AI/ML-based decision support system for Tropical Cyclone Identification, Classification, Temporal Analysis, and Multi-Source Satellite Prediction. Research Prototype.",
+  title: "CycloSense — North Indian Ocean Tropical Cyclone Intelligence & Prediction Platform",
+  description: "Decision support system for Tropical Cyclone Identification, Classification, Temporal Analysis, and Multi-Source Satellite Prediction.",
 };
 
 export default function RootLayout({
@@ -28,9 +28,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} dark h-full bg-[#0B1120] text-[#F8FAFC] antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} dark h-full bg-[#0F172A] text-[#F1F5F9] antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#0B1120] text-[#F8FAFC] selection:bg-[#1E40AF] selection:text-white">
+      <body className="min-h-full flex flex-col bg-[#0F172A] text-[#F1F5F9] selection:bg-[#3B82F6] selection:text-white">
         {children}
       </body>
     </html>

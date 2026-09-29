@@ -23,20 +23,20 @@ export const TrendArrow: React.FC<TrendArrowProps> = ({
     case "up":
     case "positive":
       icon = <ArrowUp className={iconSize} />;
-      color = "text-[#F43F5E]"; // intensification is critical in meteorological tracking
+      color = "text-[#B91C1C]"; // intensification is critical in meteorological tracking
       break;
     case "down":
     case "negative":
       icon = <ArrowDown className={iconSize} />;
-      color = "text-[#22C55E]"; // weakening is favorable
+      color = "text-[#15803D]"; // weakening is favorable
       break;
     case "up-right":
       icon = <ArrowUpRight className={iconSize} />;
-      color = "text-[#F59E0B]";
+      color = "text-[#B45309]";
       break;
     case "down-right":
       icon = <ArrowDownRight className={iconSize} />;
-      color = "text-[#38BDF8]";
+      color = "text-[#0284C7]";
       break;
     default:
       icon = <ArrowRight className={iconSize} />;

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Play, Pause, SkipBack, SkipForward, Clock, RotateCcw } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 
 export type TimeOffset = "T-12h" | "T-9h" | "T-6h" | "T-3h" | "NOW";
 
@@ -9,6 +9,7 @@ interface TimelineSliderProps {
   currentOffset: TimeOffset;
   onSelectOffset: (offset: TimeOffset) => void;
   timestamps: { [key in TimeOffset]: string };
+  autoPlay?: boolean;
 }
 
 const TIMELINE_STEPS: TimeOffset[] = ["T-12h", "T-9h", "T-6h", "T-3h", "NOW"];
@@ -17,55 +18,72 @@ export const TimelineSlider: React.FC<TimelineSliderProps> = ({
   currentOffset,
   onSelectOffset,
   timestamps,
+  autoPlay = false,
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState<1 | 2 | 4>(1);
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
 
   const currentIndex = TIMELINE_STEPS.indexOf(currentOffset);
 
-  // Playback timer
+  // Playback timer — advances every 1.8s, loops back to start
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isPlaying) {
       interval = setInterval(() => {
         const nextIdx = (currentIndex + 1) % TIMELINE_STEPS.length;
         onSelectOffset(TIMELINE_STEPS[nextIdx]);
-      }, 2000 / playbackSpeed);
+      }, 1800);
     }
     return () => clearInterval(interval);
-  }, [isPlaying, currentIndex, playbackSpeed, onSelectOffset]);
+  }, [isPlaying, currentIndex, onSelectOffset]);
+
+  // REPLAY: restart from T-12h
+  const handleReplay = () => {
+    onSelectOffset(TIMELINE_STEPS[0]);
+    setIsPlaying(true);
+  };
+
+  // If already playing, toggle pause/resume
+  const handlePlayPause = () => {
+    if (isPlaying) {
+      setIsPlaying(false);
+    } else {
+      handleReplay();
+    }
+  };
 
   const handlePrev = () => {
     const prevIdx = Math.max(0, currentIndex - 1);
     onSelectOffset(TIMELINE_STEPS[prevIdx]);
+    setIsPlaying(false);
   };
 
   const handleNext = () => {
     const nextIdx = Math.min(TIMELINE_STEPS.length - 1, currentIndex + 1);
     onSelectOffset(TIMELINE_STEPS[nextIdx]);
+    setIsPlaying(false);
   };
 
   return (
-    <div className="bg-[#111827] border border-[#263449] rounded-[4px] p-2.5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-mono select-none">
+    <div className="bg-[#1E293B] border border-[#334155] rounded-[4px] p-2.5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-mono select-none">
       {/* Playback Controls on Left */}
       <div className="flex items-center gap-1.5 shrink-0">
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className="p-1.5 bg-[#0B1120] hover:bg-[#172033] disabled:opacity-40 border border-[#263449] rounded-[3px] text-[#CBD5E1]"
-          title="Previous Step (T-3h)"
+          className="p-1.5 bg-[#0F172A] hover:bg-[#334155] disabled:opacity-40 border border-[#334155] rounded-[3px] text-[#94A3B8] transition-colors"
+          title="Previous Frame (Skip Back)"
         >
           <SkipBack className="w-3.5 h-3.5" />
         </button>
 
         <button
-          onClick={() => setIsPlaying(!isPlaying)}
+          onClick={handlePlayPause}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[3px] font-bold border transition-colors ${
             isPlaying
-              ? "bg-[#65182D] border-[#F43F5E] text-[#F8FAFC]"
-              : "bg-[#1E40AF] hover:bg-[#1E3A8A] border-[#3B82F6] text-white"
+              ? "bg-[#B91C1C] border-[#B91C1C] text-[#F1F5F9]"
+              : "bg-[#0284C7] hover:bg-[#0369A1] border-[#0284C7] text-white"
           }`}
-          title={isPlaying ? "Pause temporal replay" : "Play continuous temporal replay"}
+          title={isPlaying ? "Pause replay" : "Start replay from beginning"}
         >
           {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
           <span>{isPlaying ? "PAUSE" : "REPLAY"}</span>
@@ -74,19 +92,10 @@ export const TimelineSlider: React.FC<TimelineSliderProps> = ({
         <button
           onClick={handleNext}
           disabled={currentIndex === TIMELINE_STEPS.length - 1}
-          className="p-1.5 bg-[#0B1120] hover:bg-[#172033] disabled:opacity-40 border border-[#263449] rounded-[3px] text-[#CBD5E1]"
-          title="Next Step (+3h)"
+          className="p-1.5 bg-[#0F172A] hover:bg-[#334155] disabled:opacity-40 border border-[#334155] rounded-[3px] text-[#94A3B8] transition-colors"
+          title="Next Frame (Skip Forward)"
         >
           <SkipForward className="w-3.5 h-3.5" />
-        </button>
-
-        {/* Speed Selector */}
-        <button
-          onClick={() => setPlaybackSpeed((s) => (s === 1 ? 2 : s === 2 ? 4 : 1))}
-          className="px-2 py-1 bg-[#0B1120] hover:bg-[#172033] border border-[#263449] rounded-[3px] text-[10px] text-[#38BDF8]"
-          title="Playback speed multiplier"
-        >
-          {playbackSpeed}× SPEED
         </button>
       </div>
 
@@ -94,9 +103,9 @@ export const TimelineSlider: React.FC<TimelineSliderProps> = ({
       <div className="flex-1 w-full max-w-2xl px-2">
         <div className="relative flex items-center justify-between">
           {/* Background Track Line */}
-          <div className="absolute left-0 right-0 h-1 bg-[#263449] -z-0 rounded" />
+          <div className="absolute left-0 right-0 h-1 bg-[#334155] -z-0 rounded" />
           <div
-            className="absolute left-0 h-1 bg-[#38BDF8] -z-0 transition-all duration-200"
+            className="absolute left-0 h-1 bg-[#0284C7] -z-0 transition-all duration-200"
             style={{
               width: `${(currentIndex / (TIMELINE_STEPS.length - 1)) * 100}%`,
             }}
@@ -109,24 +118,27 @@ export const TimelineSlider: React.FC<TimelineSliderProps> = ({
             return (
               <div key={step} className="flex flex-col items-center relative z-10">
                 <button
-                  onClick={() => onSelectOffset(step)}
+                  onClick={() => {
+                    onSelectOffset(step);
+                    setIsPlaying(false);
+                  }}
                   className={`w-4 h-4 rounded-full border-2 transition-all flex items-center justify-center ${
                     isActive
-                      ? "bg-[#38BDF8] border-white scale-125 shadow-lg"
+                      ? "bg-[#0284C7] border-white scale-125 shadow-lg"
                       : isPassed
-                      ? "bg-[#1E40AF] border-[#38BDF8]"
-                      : "bg-[#0B1120] border-[#263449] hover:border-[#64748B]"
+                      ? "bg-[#3B82F6] border-[#0284C7]"
+                      : "bg-[#0F172A] border-[#334155] hover:border-[#94A3B8]"
                   }`}
                 />
                 <div className="mt-1.5 text-center">
                   <span
                     className={`text-[11px] font-bold block ${
-                      isActive ? "text-[#38BDF8]" : "text-[#94A3B8]"
+                      isActive ? "text-[#0284C7]" : "text-[#94A3B8]"
                     }`}
                   >
                     {step}
                   </span>
-                  <span className="text-[9px] text-[#64748B] block truncate max-w-[80px]">
+                  <span className="text-[9px] text-[#94A3B8] block truncate max-w-[80px]">
                     {timestamps[step] || "--"}
                   </span>
                 </div>
@@ -137,11 +149,11 @@ export const TimelineSlider: React.FC<TimelineSliderProps> = ({
       </div>
 
       {/* Active Time Readout */}
-      <div className="px-2.5 py-1 bg-[#0B1120] border border-[#263449] rounded-[3px] text-right shrink-0">
-        <span className="text-[9px] text-[#64748B] uppercase block">
+      <div className="px-2.5 py-1 bg-[#0F172A] border border-[#334155] rounded-[3px] text-right shrink-0">
+        <span className="text-[9px] text-[#94A3B8] uppercase block">
           OBSERVATION TIMESTAMP
         </span>
-        <span className="text-xs font-bold text-[#F8FAFC]">
+        <span className="text-xs font-bold text-[#F1F5F9]">
           {timestamps[currentOffset]}
         </span>
       </div>

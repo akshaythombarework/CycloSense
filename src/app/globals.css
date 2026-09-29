@@ -2,30 +2,32 @@
 
 @layer base {
   :root {
-    --background: #0B1120;
-    --surface: #111827;
-    --surface-secondary: #172033;
-    --surface-elevated: #1E293B;
-    --surface-hover: #1E293B;
-    
-    --border: #263449;
-    --border-strong: #334155;
-    --divider: #1E293B;
-    
-    --text-primary: #F8FAFC;
+    /* === MUTED GOVERNMENT-GRADE DISASTER MANAGEMENT PALETTE === */
+    --background: #0F172A;
+    --surface: #1E293B;
+    --surface-secondary: #263447;
+    --surface-elevated: #2D3E55;
+    --surface-hover: #263447;
+
+    --border: #334155;
+    --border-strong: #475569;
+    --divider: #334155;
+
+    --text-primary: #F1F5F9;
     --text-secondary: #CBD5E1;
     --text-muted: #94A3B8;
     --text-disabled: #64748B;
-    --text-data: #E2E8F0;
+    --text-data: #F1F5F9;
 
-    --status-normal: #22C55E;
-    --status-info: #38BDF8;
-    --status-prediction: #60A5FA;
-    --status-warning: #F59E0B;
-    --status-critical: #EF4444;
-    --status-ri: #F43F5E;
-    --status-reference: #A78BFA;
-    --status-unavailable: #64748B;
+    /* Muted semantic alert colors — NO NEON */
+    --status-normal: #15803D;
+    --status-info: #0284C7;
+    --status-prediction: #3B82F6;
+    --status-warning: #B45309;
+    --status-critical: #B91C1C;
+    --status-ri: #B91C1C;
+    --status-reference: #6D28D9;
+    --status-unavailable: #475569;
   }
 }
 
@@ -49,48 +51,111 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #070B14;
+  background: #0F172A;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #263449;
+  background: #334155;
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #475569;
 }
 
 .font-mono {
   font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
 }
 
+/* =====================================================
+   MAP STACKING CONTEXT ISOLATION
+   Leaflet uses z-indices up to 600+ internally. We must
+   isolate the map so its panes don't escape above modals/drawers.
+   The .map-isolation-wrapper gets isolation:isolate so that
+   all Leaflet z-indices are scoped inside it.
+   ===================================================== */
+.map-isolation-wrapper {
+  isolation: isolate;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* Leaflet dark theme custom styles */
 .leaflet-container {
-  background: #0B1120 !important;
+  background: #070B14 !important;
   font-family: inherit;
+  cursor: grab !important;
+}
+
+.leaflet-container:active {
+  cursor: grabbing !important;
 }
 
 .leaflet-bar a {
-  background-color: #111827 !important;
-  border-color: #263449 !important;
+  background-color: #1E293B !important;
+  border-color: #334155 !important;
   color: #CBD5E1 !important;
 }
 
 .leaflet-bar a:hover {
-  background-color: #1E293B !important;
-  color: #F8FAFC !important;
+  background-color: #263447 !important;
+  color: #F1F5F9 !important;
 }
 
 .leaflet-popup-content-wrapper {
-  background: #111827 !important;
-  color: #F8FAFC !important;
-  border: 1px solid #263449 !important;
+  background: #1E293B !important;
+  color: #E2E8F0 !important;
+  border: 1px solid #334155 !important;
   border-radius: 4px !important;
-  box-shadow: none !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
+  padding: 0 !important;
 }
 
-.leaflet-popup-tip {
-  background: #111827 !important;
-  border: 1px solid #263449 !important;
+.leaflet-popup-content {
+  margin: 10px 14px !important;
+  line-height: 1.5 !important;
+}
+
+.leaflet-popup-tip-container {
+  display: none !important;
+}
+
+.leaflet-popup-close-button {
+  color: #64748B !important;
+  padding: 4px 8px !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #F8FAFC !important;
+}
+
+/* Custom tooltip for forecast dots */
+.cyclone-tooltip {
+  background: #0F172A !important;
+  border: 1px solid #334155 !important;
+  border-radius: 3px !important;
+  color: #E2E8F0 !important;
+  font-family: ui-monospace, monospace !important;
+  font-size: 10px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
+  padding: 4px 8px !important;
+  white-space: nowrap !important;
+}
+
+.cyclone-tooltip::before {
+  display: none !important;
+}
+
+/* Attribution */
+.leaflet-control-attribution {
+  background: rgba(7,11,20,0.8) !important;
+  color: #475569 !important;
+  font-size: 9px !important;
+  border-radius: 2px !important;
+}
+
+.leaflet-control-attribution a {
+  color: #64748B !important;
 }
